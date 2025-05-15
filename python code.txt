@@ -1,0 +1,51 @@
+import torch
+import cv2
+import numpy as np
+
+# Step 1: Load YOLOv5 model
+# This will automatically download and cache the model
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+model.eval()  # Set the model to evaluation mode
+
+# Step 2: Start video capture (from webcam)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+
+if not cap.isOpened():
+    print("Error: Could not open webcam.")
+    exit()
+
+# Step 3: Loop through video frames
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    # Step 4: Convert frame to RGB as required by YOLOv5
+    img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    # Step 5: Run object detection
+    results = model(img_rgb)
+
+    # Step 6: Draw the detection results on the frame
+    rendered_frame = results.render()[0]
+
+    # Step 7: Convert to uint8 just in case
+    rendered_frame = np.array(rendered_frame, dtype=np.uint8)
+
+    # Step 8: Convert back to BGR for OpenCV display
+    rendered_frame = cv2.cvtColor(rendered_frame, cv2.COLOR_RGB2BGR)
+
+    # Step 9: Show the frame with detections
+    # Instead of cv2.imshow(), you can save the frame to a file if it doesn't display
+    cv2.imwrite("frame_with_detections.jpg", rendered_frame)  # Save to file for debugging
+
+    # Uncomment the following line to display the frame (if your OpenCV supports GUI):
+    # cv2.imshow("YOLO Detection", rendered_frame)
+
+    # Step 10: Break the loop on 'q' key press
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Step 11: Cleanup
+cap.release()
+cv2.destroyAllWindows()
