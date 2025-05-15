@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Vehicle Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .chat-container {
+      width: 500px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .header {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .bot, .user {
+      margin: 10px 0;
+    }
+    .bot {
+      color: green;
+    }
+    .user {
+      color: #007BFF;
+      text-align: right;
+    }
+    .message-box {
+      display: flex;
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 4px 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="header">🤖 AV Weather Detection Chatbot</div>
+  <div class="bot">👋 Hello! I’m here to help with AV environment detection.<br>
+    Type <em>snow ❄️</em>, <em>rain 🌧️</em>, <em>fog 🌁</em>, or <em>low-light 💡</em> to get sensor info!
+  </div>
+  <div class="user">You: snow</div>
+  <div class="bot">❄️ Snow Level: Temperature is -3°C</div>
+  <div class="user">You: fog</div>
+  <div class="bot">🌁 Fog Present: Oxygen concentration is 19.2%</div>
+
+  <div class="message-box">
+    <input type="text" placeholder="Type snow, rain, fog, or low-light...">
+    <button>Send</button>
+  </div>
+</div>
+
+</body>
+</html>
